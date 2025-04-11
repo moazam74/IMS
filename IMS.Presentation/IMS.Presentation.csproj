@@ -2,6 +2,9 @@
 
   <ItemGroup>
     <ProjectReference Include="..\IMS.Application\IMS.Application.csproj" />
+    <ProjectReference Include="..\IMS.Domain\IMS.Domain.csproj" />
+    <ProjectReference Include="..\IMS.Infrastructure\IMS.Infrastructure.csproj" />
+    <ProjectReference Include="..\IMS.Persistence\IMS.Persistence.csproj" />
   </ItemGroup>
 
   <PropertyGroup>

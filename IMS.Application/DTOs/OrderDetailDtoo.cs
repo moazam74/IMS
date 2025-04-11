@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace IMS.Application.DTOs
+﻿namespace IMS.Application.DTOs
 {
-	internal class OrderDetailDtoo
+	public class OrderDetailDto : OrderDto
 	{
+		public List<OrderItemDto> Items { get; set; } = new();
 	}
 }
