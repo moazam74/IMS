@@ -25,6 +25,8 @@ builder.Services.AddScoped<IReportService, ReportService>();
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession();
 
+Stripe.StripeConfiguration.ApiKey = builder.Configuration["Stripe:SecretKey"];
+
 
 var app = builder.Build();
 
@@ -35,20 +37,19 @@ if (!app.Environment.IsDevelopment())
 	app.UseHsts();
 }
 
-app.UseSession(); // Add this after UseRouting()
+app.UseSession();
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-
 app.UseRouting();
-
-
 app.UseAuthorization();
 
-// 🔹 Default MVC route
-app.MapControllers();
+// 🔹 Configure MVC routes
+app.MapControllerRoute(
+	name: "areas",
+	pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
 
 app.MapControllerRoute(
 	name: "default",
-	pattern: "{controller=Home}/{action=Index}/{id?}");
+	pattern: "{controller=UserProduct}/{action=Index}/{id?}");
 
 app.Run();
