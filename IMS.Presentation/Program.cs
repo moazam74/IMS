@@ -8,6 +8,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 // 🔹 Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddControllers();
+
 
 // 🔹 Configure EF Core with SQL Server
 builder.Services.AddDbContext<AppDbContext>(options =>
@@ -34,9 +36,12 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+
 app.UseAuthorization();
 
 // 🔹 Default MVC route
+app.MapControllers();
+
 app.MapControllerRoute(
 	name: "default",
 	pattern: "{controller=Home}/{action=Index}/{id?}");
