@@ -22,6 +22,9 @@ builder.Services.AddScoped<ISupplierService, SupplierService>();
 builder.Services.AddScoped<IOrderService, OrderService>();
 builder.Services.AddScoped<IPaymentService, PaymentService>();
 builder.Services.AddScoped<IReportService, ReportService>();
+builder.Services.AddDistributedMemoryCache();
+builder.Services.AddSession();
+
 
 var app = builder.Build();
 
@@ -32,6 +35,7 @@ if (!app.Environment.IsDevelopment())
 	app.UseHsts();
 }
 
+app.UseSession(); // Add this after UseRouting()
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 

@@ -1,0 +1,19 @@
+﻿@model IEnumerable<IMS.Domain.Entities.Product>
+<h2>Available Products</h2>
+
+<table class="table">
+    <tr><th>Name</th><th>Price</th><th>Action</th></tr>
+    @foreach (var p in Model)
+    {
+        <tr>
+            <td>@p.Name</td>
+            <td>@p.Price.ToString("C")</td>
+            <td>
+                <a asp-action="AddToCart" asp-route-id="@p.Id"
+                   asp-route-name="@p.Name" asp-route-price="@p.Price"
+                   class="btn btn-success">Add to Cart</a>
+            </td>
+        </tr>
+    }
+</table>
+<a asp-action="Cart" class="btn btn-primary">Go to Cart</a>
