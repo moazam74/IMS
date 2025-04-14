@@ -2,6 +2,7 @@
 using IMS.Infrastructure.Payment;
 using IMS.Infrastructure.Repositories;
 using IMS.Persistence.Data;
+using IMS.Presentation.Middleware;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -36,6 +37,13 @@ if (!app.Environment.IsDevelopment())
 	app.UseExceptionHandler("/Home/Error");
 	app.UseHsts();
 }
+else
+{
+    app.UseDeveloperExceptionPage();
+}
+
+// 🔹 Add global exception handling middleware
+app.UseMiddleware<ExceptionHandlingMiddleware>();
 
 app.UseSession();
 app.UseHttpsRedirection();
