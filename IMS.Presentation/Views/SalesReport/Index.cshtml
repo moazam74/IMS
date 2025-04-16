@@ -1,0 +1,43 @@
+﻿@model List<IMS.Application.DTOs.SalesReportDto>
+@{
+    ViewData["Title"] = "Sales Report by Category";
+}
+
+<h2>Sales Report by Category</h2>
+
+<form method="post" class="row g-3 mb-4">
+    <div class="col-md-3">
+        <label>Start Date</label>
+        <input type="date" name="startDate" class="form-control" required />
+    </div>
+    <div class="col-md-3">
+        <label>End Date</label>
+        <input type="date" name="endDate" class="form-control" required />
+    </div>
+    <div class="col-md-3 align-self-end">
+        <button type="submit" class="btn btn-primary">Generate Report</button>
+    </div>
+</form>
+
+@if (Model != null && Model.Any())
+{
+    <h5 class="mb-3">From: @ViewBag.StartDate To: @ViewBag.EndDate</h5>
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Category</th>
+                <th>Total Sales</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var row in Model)
+            {
+                <tr>
+                    <td>@row.CategoryName</td>
+                    <td>@row.TotalSales.ToString("C")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

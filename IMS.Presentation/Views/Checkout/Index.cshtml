@@ -1,0 +1,25 @@
+﻿@model List<IMS.Application.DTOs.CartItemDto>
+<h2>Confirm Your Order</h2>
+
+<table class="table">
+    <thead>
+        <tr><th>Product</th><th>Qty</th><th>Price</th><th>Total</th></tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.ProductName</td>
+                <td>@item.Quantity</td>
+                <td>@item.UnitPrice.ToString("C")</td>
+                <td>@item.Total.ToString("C")</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<h4>Total: @Model.Sum(x => x.Total).ToString("C")</h4>
+
+<form asp-action="Process" method="post">
+    <button type="submit" class="btn btn-success">Pay with Stripe</button>
+</form>
