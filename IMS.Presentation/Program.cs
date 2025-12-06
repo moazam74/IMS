@@ -4,6 +4,7 @@ using IMS.Infrastructure.Repositories;
 using IMS.Persistence.Data;
 using IMS.Presentation.Middleware;
 using Microsoft.EntityFrameworkCore;
+using Stripe;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +12,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddControllers();
 
+// 🔹 Configure Stripe
+StripeConfiguration.ApiKey = builder.Configuration["Stripe:SecretKey"];
+StripeConfiguration.PublishableKey = builder.Configuration["Stripe:PublishableKey"];
 
 // 🔹 Configure EF Core with SQL Server
 builder.Services.AddDbContext<AppDbContext>(options =>
@@ -25,9 +29,6 @@ builder.Services.AddScoped<IPaymentService, PaymentService>();
 builder.Services.AddScoped<IReportService, ReportService>();
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession();
-
-Stripe.StripeConfiguration.ApiKey = builder.Configuration["Stripe:SecretKey"];
-
 
 var app = builder.Build();
 
